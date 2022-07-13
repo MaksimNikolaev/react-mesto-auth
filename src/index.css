@@ -51,6 +51,8 @@
 @import url(./blocks/elements/elements.css);
 @import url(./blocks/elements/__photo-container/elements__photo-container.css);
 @import url(./blocks/loader/loader.css);
+@import url(./blocks/loader/__img/loader__img.css);
+@import url(./blocks/loader/__text/loader__text.css);
 @import url(./blocks/register/register.css);
 @import url(./blocks/register/__content/register__content.css);
 @import url(./blocks/register/__title/register__title.css);

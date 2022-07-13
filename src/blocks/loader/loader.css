@@ -1,15 +1,7 @@
 .loader {
- width: 250px;
- height: 250px;
- animation: rotate 4s infinite linear;
-}
-
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  min-height: 70vh;
+  flex-direction: column;
 }

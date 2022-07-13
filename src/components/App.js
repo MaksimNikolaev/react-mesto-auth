@@ -57,7 +57,7 @@ function App() {
   }, [selectedFilter]);
 
   useEffect(() => {
-    tokenCheck();
+    checkToken();
   },[])
   
   useEffect(() => {
@@ -73,10 +73,10 @@ function App() {
     .then(res => {
       if (res.data.email) {
         setUserEmail(res.data.email);
-        setLoggedIn(true);
         setStatus(true);
-        setMessage("Вы успешно авторизировались");  
+        setMessage("Вы успешно зарегистрировались");  
         handleLoginSubmit();
+        navigate('/sign-in');
       }
     })
     .catch(() => {
@@ -90,10 +90,13 @@ function App() {
     auth.authorize(password, email)
     .then(res => {
       if (res.token) {
+        console.log(res);
         localStorage.setItem('jwt', res.token);
-        tokenCheck();
+        /* setUserEmail(res.data.email);
+        setLoggedIn(true); */
+        checkToken();
         setStatus(true);
-        setMessage("Вы успешно зарегистрировались");        
+        setMessage("Вы успешно авторизировались");        
         handleLoginSubmit();
       }
     })
@@ -104,16 +107,16 @@ function App() {
     })
   }
 
-  const tokenCheck = () => {
+  const checkToken = () => {
     let jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth.getContent(jwt)
-      .then(res => {
-        if (res.data.email) {          
-          setUserEmail(res.data.email);
-          setLoggedIn(true);
-        }
-      })
+      .then(res => { 
+        if (res.data.email) {
+          setUserEmail(res.data.email); 
+          setLoggedIn(true); 
+        } 
+      }) 
       .catch(err => console.error(err))
     }
   }
@@ -211,7 +214,7 @@ function App() {
     api
       .removeCard(card._id)
       .then(() => {
-        setCards((state) => state.filter((item) => item !== card));
+        setCards((state) => state.filter((item) => item._id !== card._id));
         closeAllPopups();
       })
       .catch((err) => {
@@ -246,15 +249,7 @@ function App() {
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               {loadingPage ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "20px",
-                  minHeight: "70vh",
-                  flexDirection: "column",
-                }}
-              >
+              <div className="loader">
                 <Loader />
               </div>
             ) : (

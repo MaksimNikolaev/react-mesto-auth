@@ -6,7 +6,6 @@ const Register = ({handleRegister}) => {
     password: '',
     email: '' 
   });
-  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -59,7 +58,7 @@ const Register = ({handleRegister}) => {
             Зарегистрироваться
           </button>
         </form>
-        <p className="register__login">Уже зарегистрированы? <Link to="/" className="register__link">Войти</Link></p>
+        <p className="register__login">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
       </div>
     </div>
   )
